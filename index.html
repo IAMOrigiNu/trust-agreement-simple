@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Launch Agreement Customizer - Eli & Carmen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5e6d3 0%, #d4a574 50%, #87ceeb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #8b6f47;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .user-selection {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .user-card {
+            flex: 1;
+            max-width: 300px;
+            padding: 30px;
+            border: 2px solid #d4a574;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #20b2aa;
+        }
+        
+        .user-card.eli {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+        
+        .user-card.carmen {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+        }
+        
+        .user-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .user-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            color: #8b6f47;
+            font-size: 1.8em;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4a574;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #20b2aa;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .component {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .component-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .component-title {
+            font-size: 1.3em;
+            color: #2563eb;
+            font-weight: 600;
+        }
+        
+        .component-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .service-item {
+            margin: 12px 0;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-header input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .service-name {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .info-icon {
+            color: #20b2aa;
+            cursor: pointer;
+            font-size: 1.2em;
+            flex-shrink: 0;
+            user-select: none;
+        }
+        
+        .service-description {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f9ff;
+            border-left: 3px solid #20b2aa;
+            font-size: 0.95em;
+            color: #555;
+            display: none;
+        }
+        
+        .service-description.visible {
+            display: block;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #20b2aa 0%, #17a2b8 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(32, 178, 170, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .preview-section {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .signature-canvas {
+            border: 2px solid #d4a574;
+            border-radius: 8px;
+            background: white;
+            cursor: crosshair;
+            display: block;
+            margin: 20px auto;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .welcome-message {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.3em;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trust Launch Agreement Customizer</h1>
+        <p class="subtitle">Customize your 3-month trust launch plan with Ocasio Ak-Bar Saleem Willson Trust</p>
+        
+        <!-- User Selection -->
+        <div id="userSelection" class="user-selection">
+            <div class="user-card eli" onclick="selectUser('eli')">
+                <div class="user-icon">👤</div>
+                <div class="user-name">Eli</div>
+                <p>Click to begin your agreement</p>
+            </div>
+            <div class="user-card carmen" onclick="selectUser('carmen')">
+                <div class="user-icon">👤</div>
+                <div class="user-name">Carmen</div>
+                <p>Click to begin your agreement</p>
+            </div>
+        </div>
+        
+        <div class="note" style="display: block;">
+            <strong>Note:</strong> After one person completes the form, the other person can fill out a separate copy. Both responses will be combined for your comprehensive trust launch plan.
+        </div>
+        
+        <!-- Form Section -->
+        <div id="formSection" class="form-section">
+            <button class="back-btn" onclick="backToUserSelection()">← Back to User Selection</button>
+            
+            <div class="welcome-message" id="welcomeMessage"></div>
+            
+            <form id="trustForm">
+                <!-- Contact Information -->
+                <h2 class="section-title">📋 Contact Information</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Legal Name *</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Mailing Address *</label>
+                        <textarea id="address" required></textarea>
+                    </div>
+                </div>
+                
+                <h3 style="color: #8b6f47; margin-top: 30px; margin-bottom: 15px;">Partner's Information</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Partner's Full Legal Name *</label>
+                        <input type="text" id="partnerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Partner's Email Address *</label>
+                        <input type="email" id="partnerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Partner's Phone Number *</label>
+                        <input type="tel" id="partnerPhone" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Partner's Address *</label>
+                        <textarea id="partnerAddress" required></textarea>
+                    </div>
+                </div>
+                
+                <!-- Trust Components -->
+                <h2 class="section-title">🔒 Select Agreement Components</h2>
+                <p style="color: #666; margin-bottom: 20px;">Choose the components you want to include in your trust launch plan</p>
+                
+                <div id="componentsContainer"></div>
+                
+                <!-- Custom Requirements -->
+                <h2 class="section-title">✍️ Custom Requirements or Special Requests</h2>
+                <div class="form-group">
+                    <textarea id="customRequirements" placeholder="Add any additional services or aspects you want for this agreement..." style="min-height: 120px;"></textarea>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-primary" onclick="previewAgreement()">Preview Agreement</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Preview Section -->
+        <div id="previewSection" class="form-section">
+            <button class="back-btn" onclick="backToEdit()">← Back to Edit</button>
+            
+            <div class="preview-section">
+                <h2 style="text-align: center; color: #8b6f47; margin-bottom: 30px;">Agreement Preview</h2>
+                <div id="previewContent"></div>
+                
+                <h3 style="color: #8b6f47; margin-top: 40px; margin-bottom: 20px;">Digital Signature</h3>
+                <p style="margin-bottom: 15px;">Please sign below:</p>
+                <canvas id="signatureCanvas" class="signature-canvas" width="600" height="200"></canvas>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="clearSignature()">Clear Signature</button>
+                    <button type="button" class="btn btn-primary" onclick="submitAgreement()">Submit Agreement</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
+

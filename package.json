@@ -1,0 +1,16 @@
+{
+  "name": "trust-agreement-customizer",
+  "version": "1.0.0",
+  "description": "Trust Launch Agreement Customizer for Eli Thompson and Carmen Rodriguez",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7",
+    "cors": "^2.8.5"
+  }
+}
+
