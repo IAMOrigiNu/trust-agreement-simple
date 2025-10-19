@@ -152,11 +152,9 @@ function selectUser(user) {
     document.getElementById('formSection').classList.add('active');
     
     const userName = user === 'eli' ? 'Eli' : 'Carmen';
-    const partnerName = user === 'eli' ? 'Carmen' : 'Eli';
     
     document.getElementById('welcomeMessage').textContent = `Welcome, ${userName}!`;
     document.getElementById('fullName').value = userName;
-    document.getElementById('partnerName').value = partnerName;
     
     renderComponents();
 }
@@ -228,10 +226,6 @@ function previewAgreement() {
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
     const address = document.getElementById('address').value;
-    const partnerName = document.getElementById('partnerName').value;
-    const partnerEmail = document.getElementById('partnerEmail').value;
-    const partnerPhone = document.getElementById('partnerPhone').value;
-    const partnerAddress = document.getElementById('partnerAddress').value;
     const customRequirements = document.getElementById('customRequirements').value;
     
     let selectedServicesHTML = '<h3 style="color: #8b6f47; margin-top: 30px;">Selected Services:</h3>';
@@ -262,17 +256,11 @@ function previewAgreement() {
             <h3 style="color: #8b6f47; text-align: center; margin-bottom: 20px;">Trust Launch Agreement</h3>
             <p style="text-align: center; margin-bottom: 30px;"><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
             
-            <h4 style="color: #8b6f47; margin-top: 25px;">Primary Contact Information:</h4>
+            <h4 style="color: #8b6f47; margin-top: 25px;">Contact Information:</h4>
             <p><strong>Name:</strong> ${fullName}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phone}</p>
             <p><strong>Address:</strong> ${address}</p>
-            
-            <h4 style="color: #8b6f47; margin-top: 25px;">Partner Information:</h4>
-            <p><strong>Name:</strong> ${partnerName}</p>
-            <p><strong>Email:</strong> ${partnerEmail}</p>
-            <p><strong>Phone:</strong> ${partnerPhone}</p>
-            <p><strong>Address:</strong> ${partnerAddress}</p>
             
             ${selectedServicesHTML}
             
@@ -365,10 +353,6 @@ async function submitAgreement() {
         email: document.getElementById('email').value,
         phone: document.getElementById('phone').value,
         address: document.getElementById('address').value,
-        partnerName: document.getElementById('partnerName').value,
-        partnerEmail: document.getElementById('partnerEmail').value,
-        partnerPhone: document.getElementById('partnerPhone').value,
-        partnerAddress: document.getElementById('partnerAddress').value,
         customRequirements: document.getElementById('customRequirements').value,
         selectedServices: selectedServices,
         signature: signatureData,
