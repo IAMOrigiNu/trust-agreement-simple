@@ -1,6 +1,10 @@
-const express = require('express');
-const path = require('path');
-const nodemailer = require('nodemailer');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import nodemailer from 'nodemailer';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3500;
@@ -85,7 +89,7 @@ Signature: [Included as attachment]
 
 // Serve index.html for all routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
