@@ -60,27 +60,22 @@ ${formData.customRequirements || 'None'}
 Signature: [Included as attachment]
         `;
         
-        // Send email (will only work with valid SMTP credentials)
-        try {
-            await transporter.sendMail({
-                from: process.env.EMAIL_USER || 'noreply@trust-agreement.com',
-                to: 'ocasiowillson@gmail.com',
-                subject: `Trust Agreement Submission - ${formData.fullName}`,
-                text: emailContent,
-                attachments: [
-                    {
-                        filename: `signature-${formData.user}.png`,
-                        content: formData.signature.split('base64,')[1],
-                        encoding: 'base64'
-                    }
-                ]
-            });
-            console.log('Email sent successfully');
-        } catch (emailError) {
-            console.error('Email sending failed:', emailError.message);
-            // Don't fail the request if email fails - still return success
-        }
+        // Send email - must succeed for submission to be successful
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER || 'noreply@trust-agreement.com',
+            to: 'ocasiowillson@gmail.com',
+            subject: `Trust Agreement Submission - ${formData.fullName}`,
+            text: emailContent,
+            attachments: [
+                {
+                    filename: `signature-${formData.user}.png`,
+                    content: formData.signature.split('base64,')[1],
+                    encoding: 'base64'
+                }
+            ]
+        });
         
+        console.log('Email sent successfully to ocasiowillson@gmail.com');
         res.json({ success: true, message: 'Agreement submitted successfully' });
     } catch (error) {
         console.error('Submission error:', error);
