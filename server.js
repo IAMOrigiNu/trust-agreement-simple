@@ -95,7 +95,7 @@ app.post('/api/submit', async (req, res) => {
         // Send email via Resend
         const { data, error } = await resend.emails.send({
             from: 'Trust Agreement <onboarding@resend.dev>',
-            to: ['ocasiowillson@gmail.com'],
+            to: ['ocasiowillson@protonmail.com'],
             subject: `Trust Agreement Submission - ${formData.fullName}`,
             html: emailHTML,
             attachments: [
