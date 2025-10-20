@@ -174,12 +174,17 @@
             padding: 12px;
             background: white;
             border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .service-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         
         .service-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .service-header input[type="checkbox"] {
@@ -187,11 +192,22 @@
             height: 20px;
             cursor: pointer;
             flex-shrink: 0;
+            margin: 0;
+            accent-color: #20b2aa;
         }
         
         .service-name {
             flex: 1;
             cursor: pointer;
+            font-size: 1em;
+            color: #333;
+            font-weight: 500;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .service-name:hover {
+            color: #20b2aa;
         }
         
         .info-icon {

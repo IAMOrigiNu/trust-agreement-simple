@@ -173,9 +173,11 @@ function renderComponents() {
             const description = serviceDescriptions[service] || '';
             servicesHTML += `
                 <div class="service-item">
-                    <input type="checkbox" id="${serviceId}" onchange="toggleService('${serviceId}')">
-                    <label for="${serviceId}">${service}</label>
-                    <span class="info-icon" onclick="toggleDescription('desc_${serviceId}')">ℹ️</span>
+                    <div class="service-header">
+                        <input type="checkbox" id="${serviceId}" onchange="toggleService('${serviceId}')">
+                        <label for="${serviceId}" class="service-name">${service}</label>
+                        <span class="info-icon" onclick="toggleDescription('desc_${serviceId}')">ℹ️</span>
+                    </div>
                     <div class="service-description" id="desc_${serviceId}">
                         ${description}
                     </div>
